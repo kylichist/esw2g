@@ -5,6 +5,7 @@ import { createServer } from 'http';
 import App from './app';
 import { GAME_ROUT_PREFIX } from '../common';
 
+require('dotenv').config()
 const PORT = process.env.PORT || 3000;
 const PATH = process.env.PUBLIC_PATH;
 const PUBLIC_PATH = PATH ? path.resolve(__dirname, PATH) : path.resolve(__dirname, './public');
