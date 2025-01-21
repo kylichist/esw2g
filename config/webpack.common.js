@@ -87,8 +87,9 @@ module.exports = {
   ],
   resolve: {
     extensions: [ '.ts', '.js' ],
-  },
-  experiments: {
-    asset: true
   }
+  //},
+  // experiments: {
+  //   asset: true
+  // }
 };

@@ -1,17 +1,17 @@
 import {
-  MAX_CARDS_IN_HAND,
   AnimationTimes,
   CardTypes,
   createElement,
   delay,
-  ICard,
   forEachAsync,
+  ICard,
+  MAX_CARDS_IN_HAND,
   playSound,
   Sounds,
 } from '../../../common';
 import { CSSClasses, Tags } from '../../enums';
 import { BaseComponent } from '../base-component';
-import { CardBase, CardSpell, CardFake } from '../card-spell';
+import { CardBase, CardFake, CardSpell } from '../card-spell';
 
 const MAX_CARDS_IN_HAND_ROTATION = 30;
 const ANIMATION_SELECTED_TIME = 300;
@@ -61,7 +61,7 @@ export class PlayerCards extends BaseComponent {
     this.isCardTaked = false;
     const cards = cardsInfo.map((cardInfo) => new CardSpell(cardInfo));
     cards.forEach((card) => card.flip());
-    if (noTimeout) await this.addToHand(cards, 0);
+    if (noTimeout) await this.addToHand(cards, AnimationTimes.Zero);
     else await this.addToHand(cards);
     cards.forEach((card) => card.element.classList.add(CSSClasses.CardUsed));
   };

@@ -5,7 +5,7 @@ import {
   CONNECTION_NAMESPACE,
   CONNECTION_PATH,
   HubEventsServer,
-  HubEventsClient,
+  HubEventsClient, ISocket,
 } from '../../common';
 
 export class ServerConnection extends BaseConnection<HubEventsServer, HubEventsClient> {
@@ -14,7 +14,7 @@ export class ServerConnection extends BaseConnection<HubEventsServer, HubEventsC
     super(socket);
   }
 
-  private static createSocket(url: string, onConnected?: () => void, onError?: () => void): SocketIOClient.Socket {
+  private static createSocket(url: string, onConnected?: () => void, onError?: () => void): ISocket {
     const manager = new Manager(url, {
       path: CONNECTION_PATH,
       reconnectionAttempts: CONNECTION_ATTEMPTS,
@@ -27,6 +27,6 @@ export class ServerConnection extends BaseConnection<HubEventsServer, HubEventsC
     socket.on('connect', () => {
       if (onConnected) onConnected();
     });
-    return socket;
+    return socket as ISocket;
   }
 }
