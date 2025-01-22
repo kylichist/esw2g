@@ -1,0 +1,11 @@
+.github
+.idea
+dist
+node_modules
+.editorconfig
+.env
+CHANGELOG.md
+nodemon.json
+README.md
+.gitignore
+.git
