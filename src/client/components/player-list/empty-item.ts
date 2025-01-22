@@ -5,22 +5,22 @@ import { BaseButton } from '../base-button/base-button';
 import { ILobbyLocalization, LOBBY_DEFAULT_LOCALIZATION } from '../../localization';
 
 export class EmptyItem extends BaseComponent {
-  private loc: ILobbyLocalization;
+    private loc: ILobbyLocalization;
 
-  private addBotButton?: BaseButton;
+    private addBotButton?: BaseButton;
 
-  constructor(private gameCreator: boolean, private addBot: () => void, localization?: ILobbyLocalization) {
-    super([CSSClasses.PlayerListItem, CSSClasses.EmptyItem]);
-    this.loc = localization || LOBBY_DEFAULT_LOCALIZATION;
-    const playerAvatarWrapper = createElement(Tags.Div, [CSSClasses.PlayerAvatar]);
-    this.element.append(playerAvatarWrapper);
-    if (this.gameCreator) {
-      this.addBotButton = new BaseButton(this.loc.AddBot, () => this.addBot(), [CSSClasses.AddBotButton]);
-      this.element.append(this.addBotButton.element);
+    constructor(private gameCreator: boolean, private addBot: () => void, localization?: ILobbyLocalization) {
+        super([CSSClasses.PlayerListItem, CSSClasses.EmptyItem]);
+        this.loc = localization || LOBBY_DEFAULT_LOCALIZATION;
+        const playerAvatarWrapper = createElement(Tags.Div, [CSSClasses.PlayerAvatar]);
+        this.element.append(playerAvatarWrapper);
+        if (this.gameCreator) {
+            this.addBotButton = new BaseButton(this.loc.AddBot, () => this.addBot(), [CSSClasses.AddBotButton]);
+            this.element.append(this.addBotButton.element);
+        }
     }
-  }
 
-  public set addBotButtonIsDisabled(value: boolean) {
-    if (this.addBotButton) this.addBotButton.disabled = value;
-  }
+    public set addBotButtonIsDisabled(value: boolean) {
+        if (this.addBotButton) this.addBotButton.disabled = value;
+    }
 }

@@ -1,3 +1,3 @@
 export interface IAboutLocalization {
-  BackButton: string,
+    BackButton: string,
 }

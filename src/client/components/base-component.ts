@@ -4,32 +4,32 @@ import { IRootComponent } from '../root-component';
 import { IComponent } from './component';
 
 export abstract class BaseComponent implements IComponent {
-  private static root?: IRootComponent;
+    private static root?: IRootComponent;
 
-  private el: HTMLElement;
+    private el: HTMLElement;
 
-  constructor(classList?: Array<CSSClasses>) {
-    this.el = createElement(Tags.Div, [CSSClasses.Component, ...(classList || [])]);
-  }
+    constructor(classList?: Array<CSSClasses>) {
+        this.el = createElement(Tags.Div, [CSSClasses.Component, ...(classList || [])]);
+    }
 
-  public get element(): HTMLElement {
-    return this.el;
-  }
+    public get element(): HTMLElement {
+        return this.el;
+    }
 
-  // eslint-disable-next-line class-methods-use-this
-  protected get root(): IRootComponent {
-    return BaseComponent.rootComponent;
-  }
+    // eslint-disable-next-line class-methods-use-this
+    protected get root(): IRootComponent {
+        return BaseComponent.rootComponent;
+    }
 
-  private static get rootComponent(): IRootComponent {
-    return BaseComponent.root || {
-      rootElement: document.body,
-      baseURL: '',
-      getGameUrl: () => '',
-    };
-  }
+    private static get rootComponent(): IRootComponent {
+        return BaseComponent.root || {
+            rootElement: document.body,
+            baseURL: '',
+            getGameUrl: () => '',
+        };
+    }
 
-  static setRoot(root: IRootComponent): void {
-    if (!BaseComponent.root) BaseComponent.root = root;
-  }
+    static setRoot(root: IRootComponent): void {
+        if (!BaseComponent.root) BaseComponent.root = root;
+    }
 }

@@ -1,7 +1,7 @@
 export enum MagicSigns {
-  mystery,
-  dark,
-  nature,
-  element,
-  illusion,
+    mystery,
+    dark,
+    nature,
+    element,
+    illusion,
 }

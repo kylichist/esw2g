@@ -5,7 +5,8 @@ import { createServer } from 'http';
 import App from './app';
 import { GAME_ROUT_PREFIX } from '../common';
 
-require('dotenv').config()
+require('dotenv')
+    .config()
 const PORT = process.env.PORT || 3000;
 const PATH = process.env.PUBLIC_PATH;
 const PUBLIC_PATH = PATH ? path.resolve(__dirname, PATH) : path.resolve(__dirname, './public');
@@ -18,12 +19,14 @@ const server = createServer(exp);
 
 // configure middleware
 exp.use((req, res, next) => {
-  if (req.originalUrl.startsWith(`/${GAME_ROUT_PREFIX}`)) {
-    res.sendFile(path.join(PUBLIC_PATH, 'index.html'));
-  } else if (!fs.existsSync(path.join(PUBLIC_PATH, req.originalUrl))) {
-    res.statusCode = 404;
-    res.sendFile(path.join(PUBLIC_PATH, '404.html'));
-  } else next();
+    if (req.originalUrl.startsWith(`/${GAME_ROUT_PREFIX}`)) {
+        res.sendFile(path.join(PUBLIC_PATH, 'index.html'));
+    } else if (!fs.existsSync(path.join(PUBLIC_PATH, req.originalUrl))) {
+        res.statusCode = 404;
+        res.sendFile(path.join(PUBLIC_PATH, '404.html'));
+    } else {
+        next();
+    }
 });
 
 exp.use(express.static(PUBLIC_PATH));

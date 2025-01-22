@@ -1,5 +1,5 @@
 export interface ICreatePlayerRequest {
-  gameId: string,
-  userName: string,
-  heroId: string
+    gameId: string,
+    userName: string,
+    heroId: string
 }

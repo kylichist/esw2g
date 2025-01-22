@@ -2,77 +2,95 @@
 @import './constants.scss';
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  &:active, &:focus { outline: none; }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    &:active, &:focus {
+        outline: none;
+    }
 }
 
 html {
-  font-size: 16px;
+    font-size: 16px;
 }
 
-body { overflow: hidden; }
+body {
+    overflow: hidden;
+}
 
 main {
-  height: 100vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: $primary-dark-color;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: $primary-dark-color;
 }
 
 a {
-  color: inherit;
-  text-decoration: inherit;
-  font-style: inherit;
+    color: inherit;
+    text-decoration: inherit;
+    font-style: inherit;
 }
 
 .component {
-  &::-webkit-scrollbar, & *::-webkit-scrollbar { width: .7rem; }
-  &::-webkit-scrollbar-track, & *::-webkit-scrollbar-track { background: none; }
-  &::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb {
-    background: $primary-dark-color;
-    border-radius: .35rem;
-  }
+    &::-webkit-scrollbar, & *::-webkit-scrollbar {
+        width: .7rem;
+    }
+
+    &::-webkit-scrollbar-track, & *::-webkit-scrollbar-track {
+        background: none;
+    }
+
+    &::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb {
+        background: $primary-dark-color;
+        border-radius: .35rem;
+    }
 }
 
 .footer {
-  position: absolute;
-  bottom: .5rem;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @include primary-font;
-  color: $cold-font-color;
-  & > div { margin: 0 .5rem; }
+    position: absolute;
+    bottom: .5rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include primary-font;
+    color: $cold-font-color;
 
-  a { transition: all .3s; }
+    & > div {
+        margin: 0 .5rem;
+    }
 
-  a:hover { color: $secondary-warning-color; }
+    a {
+        transition: all .3s;
+    }
 
-  &__logo-rsschool svg {
-    height: 1.75rem;
-    display: inline-block;
-  }
+    a:hover {
+        color: $secondary-warning-color;
+    }
+
+    &__logo-rsschool svg {
+        height: 1.75rem;
+        display: inline-block;
+    }
 }
 
 .pg {
-  position: fixed;
-  right: 1rem;
-  top: 1rem;
-  width: 4.5rem;
-  height: 4.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: $primary-font;
-  font-size: 2.5rem;
-  color: $cold-font-color;
-  border: solid .2rem $cold-font-color;
-  border-radius: 50%;
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $primary-font;
+    font-size: 2.5rem;
+    color: $cold-font-color;
+    border: solid .2rem $cold-font-color;
+    border-radius: 50%;
 }
 
 @import '../components/overlay/overlay.scss';
@@ -100,12 +118,13 @@ a {
 @import '../components/splash-screen/splash-screen.scss';
 
 @media (max-width: $medium-screen-width), (max-height: $medium-screen-height) {
-  html {
-    font-size: 12px;
-  }
+    html {
+        font-size: 12px;
+    }
 }
+
 @media (min-width: $large-screen-width), (min-height: $large-screen-height) {
-  html {
-    font-size: 26px;
-  }
+    html {
+        font-size: 26px;
+    }
 }

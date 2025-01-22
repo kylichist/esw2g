@@ -5,10 +5,10 @@ export { IGameScreenLocalization } from './game-screen-localization';
 export { IAboutLocalization } from './about-localization';
 export { IRulesLocalization } from './rules-localization';
 export {
-  LOBBY_DEFAULT_LOCALIZATION,
-  START_SCREEN_DEFAULT_LOCALIZATION,
-  GAME_END_DEFAULT_LOCALIZATION,
-  GAME_SCREEN_DEFAULT_LOCALIZATION,
-  ABOUT_DEFAULT_LOCALIZATION,
-  RULES_DEFAULT_LOCALIZATION,
+    LOBBY_DEFAULT_LOCALIZATION,
+    START_SCREEN_DEFAULT_LOCALIZATION,
+    GAME_END_DEFAULT_LOCALIZATION,
+    GAME_SCREEN_DEFAULT_LOCALIZATION,
+    ABOUT_DEFAULT_LOCALIZATION,
+    RULES_DEFAULT_LOCALIZATION,
 } from './localization';

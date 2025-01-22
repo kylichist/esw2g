@@ -4,7 +4,7 @@ import { BaseButton } from '../base-button/base-button';
 import { IStartScreenLocalization, START_SCREEN_DEFAULT_LOCALIZATION } from '../../localization';
 import { GameService } from '../../services';
 import {
-  createElement, delay, getRandomInteger,
+    createElement, delay, getRandomInteger,
 } from '../../../common';
 import { showAlert } from '../show-alert';
 
@@ -13,50 +13,50 @@ const LOGO = 'logo.png';
 const ANIMATION_TIME = 500;
 
 export class StartScreen extends BaseComponent {
-  private loc: IStartScreenLocalization;
+    private loc: IStartScreenLocalization;
 
-  private bgImg: HTMLImageElement = new Image();
+    private bgImg: HTMLImageElement = new Image();
 
-  constructor(
-    private gameService: GameService,
-    private showRulesScreen: () => void,
-    private showAboutScreen: () => void,
-    localization?: IStartScreenLocalization,
-  ) {
-    super([CSSClasses.StartScreen]);
-    this.loc = localization || START_SCREEN_DEFAULT_LOCALIZATION;
-    this.createMarkup();
-  }
+    constructor(
+        private gameService: GameService,
+        private showRulesScreen: () => void,
+        private showAboutScreen: () => void,
+        localization?: IStartScreenLocalization,
+    ) {
+        super([CSSClasses.StartScreen]);
+        this.loc = localization || START_SCREEN_DEFAULT_LOCALIZATION;
+        this.createMarkup();
+    }
 
-  private createMarkup() {
-    const logo = createElement(Tags.Div, [CSSClasses.StartScreenLogo]);
-    logo.innerHTML = `<img src=${ImagesPaths.Images}${LOGO} alt=logo>`;
-    const buttonsContainer = createElement(Tags.Div, [CSSClasses.StartScreenButtons]);
-    const newGameButton = new BaseButton(
-      this.loc.NewGame,
-      () => this.startNewGame(),
-      [CSSClasses.StartScreenButton],
-    );
-    const rulesButton = new BaseButton(
-      this.loc.Rules,
-      () => this.showRulesScreen(),
-      [CSSClasses.StartScreenButton],
-    );
-    const aboutButton = new BaseButton(
-      this.loc.About,
-      () => this.showAboutScreen(),
-      [CSSClasses.StartScreenButton],
-    );
+    private createMarkup() {
+        const logo = createElement(Tags.Div, [CSSClasses.StartScreenLogo]);
+        logo.innerHTML = `<img src=${ImagesPaths.Images}${LOGO} alt=logo>`;
+        const buttonsContainer = createElement(Tags.Div, [CSSClasses.StartScreenButtons]);
+        const newGameButton = new BaseButton(
+            this.loc.NewGame,
+            () => this.startNewGame(),
+            [CSSClasses.StartScreenButton],
+        );
+        const rulesButton = new BaseButton(
+            this.loc.Rules,
+            () => this.showRulesScreen(),
+            [CSSClasses.StartScreenButton],
+        );
+        const aboutButton = new BaseButton(
+            this.loc.About,
+            () => this.showAboutScreen(),
+            [CSSClasses.StartScreenButton],
+        );
 
-    buttonsContainer.append(
-      newGameButton.element,
-      rulesButton.element,
-      aboutButton.element,
-    );
+        buttonsContainer.append(
+            newGameButton.element,
+            rulesButton.element,
+            aboutButton.element,
+        );
 
-    const footer = createElement(Tags.Div, [CSSClasses.Footer]);
-    /* eslint-disable max-len */
-    footer.innerHTML = `
+        const footer = createElement(Tags.Div, [CSSClasses.Footer]);
+        /* eslint-disable max-len */
+        footer.innerHTML = `
       <div class="footer__links">
         <a href="https://github.com/ai297/rs-clone" target="_blank">Проект на GitHub</a>
       </div>
@@ -69,32 +69,32 @@ export class StartScreen extends BaseComponent {
       </div>
       <div class="footer__year">2020-Q3</div>
     `;
-    const pg = createElement(Tags.Div, [CSSClasses.PG], '16+');
-    this.element.append(logo, buttonsContainer, footer, pg);
-  }
-
-  async beforeAppend() : Promise<void> {
-    this.element.classList.add(CSSClasses.StartScreenHidden);
-    const image = String(BACKGROUNDS[getRandomInteger(0, BACKGROUNDS.length - 1)]);
-    return new Promise<void>((resolve) => {
-      this.bgImg.src = `${ImagesPaths.Backgrounds}${image}`;
-      this.bgImg.onload = () => {
-        resolve();
-      };
-    });
-  }
-
-  async onAppended() : Promise<void> {
-    this.element.style.backgroundImage = `url(${this.bgImg.src})`;
-    await delay(ANIMATION_TIME);
-    this.element.classList.remove(CSSClasses.StartScreenHidden);
-  }
-
-  async startNewGame() : Promise<void> {
-    try {
-      await this.gameService.newGame();
-    } catch {
-      await showAlert('Не удалось создать новую игру...');
+        const pg = createElement(Tags.Div, [CSSClasses.PG], '16+');
+        this.element.append(logo, buttonsContainer, footer, pg);
     }
-  }
+
+    async beforeAppend(): Promise<void> {
+        this.element.classList.add(CSSClasses.StartScreenHidden);
+        const image = String(BACKGROUNDS[getRandomInteger(0, BACKGROUNDS.length - 1)]);
+        return new Promise<void>((resolve) => {
+            this.bgImg.src = `${ImagesPaths.Backgrounds}${image}`;
+            this.bgImg.onload = () => {
+                resolve();
+            };
+        });
+    }
+
+    async onAppended(): Promise<void> {
+        this.element.style.backgroundImage = `url(${this.bgImg.src})`;
+        await delay(ANIMATION_TIME);
+        this.element.classList.remove(CSSClasses.StartScreenHidden);
+    }
+
+    async startNewGame(): Promise<void> {
+        try {
+            await this.gameService.newGame();
+        } catch {
+            await showAlert('Не удалось создать новую игру...');
+        }
+    }
 }

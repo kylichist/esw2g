@@ -1,5 +1,5 @@
 export interface IDiceRoll {
-  playerId: string,
-  rolls: Array<number>,
-  bonus: number,
+    playerId: string,
+    rolls: Array<number>,
+    bonus: number,
 }

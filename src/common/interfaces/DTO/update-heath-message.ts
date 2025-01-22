@@ -1,6 +1,6 @@
 export interface IHealthUpdate {
-  playerId: string,
-  healthsChange: number,
-  currentHealth: number,
-  isDamage: boolean,
+    playerId: string,
+    healthsChange: number,
+    currentHealth: number,
+    isDamage: boolean,
 }

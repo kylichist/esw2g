@@ -13,16 +13,16 @@
  * });
  */
 export const forEachAsync = async <T>(
-  array: Array<T>,
-  handler: (item: T, index: number, breakFunc: () => void) => Promise<void>,
-  counter = 0,
+    array: Array<T>,
+    handler: (item: T, index: number, breakFunc: () => void) => Promise<void>,
+    counter = 0,
 ): Promise<void> => {
-  let isNotBreaked = true;
-  const breakFunc = (): void => {
-    isNotBreaked = false;
-  };
-  if (array.length === 0) return;
-  const item = <T> array[0];
-  await handler(item, counter, breakFunc);
-  if (isNotBreaked) await forEachAsync(array.slice(1), handler, counter + 1);
+    let isNotBreaked = true;
+    const breakFunc = (): void => {
+        isNotBreaked = false;
+    };
+    if (array.length === 0) return;
+    const item = <T>array[0];
+    await handler(item, counter, breakFunc);
+    if (isNotBreaked) await forEachAsync(array.slice(1), handler, counter + 1);
 };

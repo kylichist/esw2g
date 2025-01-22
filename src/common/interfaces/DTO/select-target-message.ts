@@ -1,4 +1,4 @@
 export interface ISelectTarget {
-  numberOfTargets: number,
-  targets: Array<string>,
+    numberOfTargets: number,
+    targets: Array<string>,
 }
