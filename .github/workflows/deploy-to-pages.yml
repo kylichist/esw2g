@@ -2,9 +2,12 @@ name: Deploy to GitHub Pages
 
 on:
     workflow_run:
-        workflows: [ Create and publish a Docker image ]
+        workflows: [ Publish to GitHub Packages ]
         types:
             - completed
+
+run-name: ${{ github.event.workflow_run.head_branch }}
+
 jobs:
     dump_contexts_to_log:
         runs-on: ubuntu-latest
