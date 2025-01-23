@@ -13,7 +13,7 @@ env:
     REPOSITORY: ${{ github.event.workflow_run.head_repository.name }}
 
 jobs:
-    deploy:
+    pull-and-run-container:
         runs-on: ubuntu-latest
 
         steps:
@@ -21,7 +21,7 @@ jobs:
                 uses: actions/checkout@v4
 
             -   name: Stop old container
-                run: docker stop ${{ env.REPOSITORY }}
+                run: docker stop ${{ env.REPOSITORY }} || true
 
             -   name: Remove old container
                 run: docker container prune
