@@ -38,7 +38,7 @@ jobs:
                     password: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Pull Docker image
-                run: docker pull ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPOSITORY }}/${{ env.REPOSITORY }}:latest
+                run: docker pull ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPOSITORY }}:latest
 
             -   name: Run Docker container
-                run: docker run --name ${{ env.REPOSITORY }} -p 3080:3000 -d ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPOSITORY }}:latest
+                run: docker run --name ${{ env.REPOSITORY }} -p 443:3000 -d ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPOSITORY }}:latest
