@@ -2,7 +2,12 @@ name: Create and publish a Docker image
 
 on:
     push:
-        branches: [ 'release' ]
+        branches:
+            - 'master'
+        tags:
+            - 'v*'
+
+run-name: ${{  github.ref_name }}
 
 env:
     REGISTRY: ghcr.io
@@ -34,6 +39,7 @@ jobs:
                 uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
                 with:
                     images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+                    tags: type=ref,pattern={{version}}
 
             -   name: Build and push Docker image
                 id: push
@@ -41,7 +47,7 @@ jobs:
                 with:
                     context: .
                     push: true
-                    tags: 1.0.0
+                    tags: ${{ steps.meta.outputs.tags }}
                     labels: ${{ steps.meta.outputs.labels }}
 
             -   name: Generate artifact attestation
