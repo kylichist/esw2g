@@ -8,31 +8,29 @@ on:
 
 run-name: ${{ github.event.workflow_run.head_branch }}
 
+env:
+    OWNER: ${{ github.event.workflow_run.owner.login }}
+    REPOSITORY: ${{ github.event.workflow_run.head_repository.name }}
+
 jobs:
-    dump_contexts_to_log:
+    deploy:
         runs-on: ubuntu-latest
+
         steps:
-            -   name: Dump GitHub context
-                env:
-                    GITHUB_CONTEXT: ${{ toJson(github) }}
-                run: echo "$GITHUB_CONTEXT"
-            -   name: Dump job context
-                env:
-                    JOB_CONTEXT: ${{ toJson(job) }}
-                run: echo "$JOB_CONTEXT"
-            -   name: Dump steps context
-                env:
-                    STEPS_CONTEXT: ${{ toJson(steps) }}
-                run: echo "$STEPS_CONTEXT"
-            -   name: Dump runner context
-                env:
-                    RUNNER_CONTEXT: ${{ toJson(runner) }}
-                run: echo "$RUNNER_CONTEXT"
-            -   name: Dump strategy context
-                env:
-                    STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-                run: echo "$STRATEGY_CONTEXT"
-            -   name: Dump matrix context
-                env:
-                    MATRIX_CONTEXT: ${{ toJson(matrix) }}
-                run: echo "$MATRIX_CONTEXT"
+            -   name: Checkout repository
+                uses: actions/checkout@v4
+
+            -   name: Stop old container
+                run: docker stop ${{ env.REPOSITORY }}
+
+            -   name: Remove old container
+                run: docker container prune
+
+            -   name: Login to GitHub Packages
+                run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ env.OWNER }} --password-stdin
+
+            -   name: Pull Docker image
+                run: docker pull ghcr.io/${{ env.OWNER }}/${{ env.REPOSITORY }}/${{ env.REPOSITORY }}:latest
+
+            -   name: Run Docker container
+                run: docker run --name ${{ env.REPOSITORY }} -p 3080:3000 -d ghcr.io/${{ env.OWNER }}/${{ env.REPOSITORY }}/${{ env.REPOSITORY }}:latest
