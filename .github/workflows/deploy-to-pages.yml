@@ -1,8 +1,10 @@
-name: Deploy to GitHub Pages
+name: Create and publish a Docker image
 
 on:
-    registry_package:
-        types: [ published, updated ]
+    workflow_run:
+        workflows: [ Run Tests ]
+        types:
+            - completed
 jobs:
     dump_contexts_to_log:
         runs-on: ubuntu-latest
