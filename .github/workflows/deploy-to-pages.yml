@@ -10,7 +10,7 @@ run-name: ${{ github.event.workflow_run.head_branch }}
 
 env:
     REGISTRY: ghcr.io
-    OWNER: ${{ github.event.workflow_run.owner.login }}
+    OWNER: ${{ github.actor }}
     REPOSITORY: ${{ github.event.workflow_run.head_repository.name }}
 
 jobs:
