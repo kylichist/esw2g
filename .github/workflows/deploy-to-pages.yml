@@ -9,6 +9,7 @@ on:
 run-name: ${{ github.event.workflow_run.head_branch }}
 
 env:
+    REGISTRY: ghcr.io
     OWNER: ${{ github.event.workflow_run.owner.login }}
     REPOSITORY: ${{ github.event.workflow_run.head_repository.name }}
 
@@ -30,10 +31,14 @@ jobs:
                 run: docker container prune
 
             -   name: Login to GitHub Packages
-                run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ env.OWNER }} --password-stdin
+                uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+                with:
+                    registry: ${{ env.REGISTRY }}
+                    username: ${{ env.OWNER }}
+                    password: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Pull Docker image
-                run: docker pull ghcr.io/${{ env.OWNER }}/${{ env.REPOSITORY }}/${{ env.REPOSITORY }}:latest
+                run: docker pull ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPOSITORY }}/${{ env.REPOSITORY }}:latest
 
             -   name: Run Docker container
-                run: docker run --name ${{ env.REPOSITORY }} -p 3080:3000 -d ghcr.io/${{ env.OWNER }}/${{ env.REPOSITORY }}/${{ env.REPOSITORY }}:latest
+                run: docker run --name ${{ env.REPOSITORY }} -p 3080:3000 -d ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPOSITORY }}/${{ env.REPOSITORY }}:latest
